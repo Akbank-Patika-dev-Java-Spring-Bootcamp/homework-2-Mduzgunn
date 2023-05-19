@@ -1,7 +1,7 @@
 package com.md.hw2.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Column;
+import com.md.hw2.base.entity.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,13 +15,13 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Comment {
+public class Comment extends BaseEntity {
     @Id
     @GeneratedValue(generator = "Comment", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "Comment", sequenceName = "COMMENT_ID_SEQ")
     private Long id;
 
-    private String commentBody;
+    private String message;
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "comments" })
@@ -32,10 +32,5 @@ public class Comment {
     @JoinColumn(name = "USER_ID")
     @JsonIgnoreProperties(value = { "comments" })
     private User user;
-
-//    @Column(name = "PRODUCT_ID", nullable = false)
-//    private Long productId;
-//    @Column(name = "USER_ID", nullable = false)
-//    private Long userId;
 
 }

@@ -1,4 +1,7 @@
 package com.md.hw2.dto.requests;
 
-public class CreateCommentRequest {
+public record CreateCommentRequest(String message,
+                                   Long productId,
+                                   Long userId) {
+
 }

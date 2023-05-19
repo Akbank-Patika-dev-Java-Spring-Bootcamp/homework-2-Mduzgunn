@@ -1,6 +1,7 @@
 package com.md.hw2.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.md.hw2.base.entity.BaseEntity;
 import com.md.hw2.enums.UserType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,7 +25,7 @@ import java.util.List;
 @Table(name = "CUSTOMER")
 @Getter
 @Setter
-public class User {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(generator = "User", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "User", sequenceName = "USER_ID_SEQ")

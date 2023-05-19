@@ -1,6 +1,7 @@
 package com.md.hw2.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.md.hw2.base.entity.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Product {
+public class Product extends BaseEntity {
     @Id
     @GeneratedValue(generator = "Product", strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "Product", sequenceName = "PRODUCT_ID_SEQ")
