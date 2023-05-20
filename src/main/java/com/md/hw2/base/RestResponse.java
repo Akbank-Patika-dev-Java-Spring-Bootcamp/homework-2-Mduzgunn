@@ -24,6 +24,11 @@ public class RestResponse<T> implements Serializable {
         this.isSuccess = isSuccess;
         this.responseDate = LocalDateTime.now();
     }
+    public RestResponse(String message, boolean isSuccess) {
+        this.messages = message;
+        this.isSuccess = isSuccess;
+        this.responseDate = LocalDateTime.now();
+    }
 
     public static <T> RestResponse<T> of(T t){
         return new RestResponse<>(t, true);
@@ -35,6 +40,9 @@ public class RestResponse<T> implements Serializable {
 
     public static <T> RestResponse<T> error(T t){
         return new RestResponse<>(t, false);
+    }
+    public static <T> RestResponse<T> errorMessage(String message){
+        return new RestResponse<>(message, false);
     }
 
     public void setMessages(String messages) {

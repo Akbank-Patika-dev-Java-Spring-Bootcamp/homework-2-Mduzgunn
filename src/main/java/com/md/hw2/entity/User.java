@@ -18,6 +18,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.List;
 
@@ -31,21 +32,21 @@ public class User extends BaseEntity {
     @SequenceGenerator(name = "User", sequenceName = "USER_ID_SEQ")
     private Long id;
 
-    @Column(name = "NAME", length = 100, nullable = false)
+    @Column(name = "NAME", length = 50, nullable = false, unique = true)
     private String name;
 
-    @Column(name = "SURNAME", length = 100, nullable = false)
+    @Column(name = "SURNAME", length = 50, nullable = false, unique = true)
     private String surname;
     @NotNull
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     @NotNull
-    @Column(name = "PHONE_NUMBER", nullable = false)
+    @Column(name = "PHONE_NUMBER", nullable = false, unique = true)
     private String phoneNumber;
 
     @Email
-    @Column(name = "EMAIL", length = 50)
+    @Column(name = "EMAIL", length = 50, unique = true)
     private String email;
 
     @Column(name = "USER_TYPE")

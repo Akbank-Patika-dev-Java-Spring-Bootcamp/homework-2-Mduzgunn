@@ -1,14 +1,14 @@
-package com.md.hw2.exception;
+package com.md.hw2.service.exception;
 
 import com.md.hw2.base.exception.BaseErrorMessage;
 
-public enum UserErrorMessage implements BaseErrorMessage {
+public enum ProductErrorMessage implements BaseErrorMessage {
 
-    USER_NOT_FOUND("User not found!");
+    PRODUCT_NOT_FOUND("Product not found!");
 
     private String message;
 
-    UserErrorMessage(String message) {
+    ProductErrorMessage(String message) {
         this.message = message;
     }
 

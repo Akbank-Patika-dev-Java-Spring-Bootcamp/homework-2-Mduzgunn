@@ -4,6 +4,7 @@ import com.md.hw2.base.RestResponse;
 import com.md.hw2.controller.contract.UserControllerContract;
 import com.md.hw2.dto.UserDto;
 import com.md.hw2.dto.requests.CreateUserRequest;
+import com.md.hw2.dto.requests.DeleteUserRequest;
 import com.md.hw2.dto.requests.UpdateUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,15 +44,29 @@ public class UserController {
         return ResponseEntity.ok(RestResponse.of(userDto));
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<RestResponse<UserDto>> findByName(@PathVariable String name) {
+        var userDto = userControllerContract.findByName(name);
+        return ResponseEntity.ok(RestResponse.of(userDto));
+    }
+
     @GetMapping
     public ResponseEntity<RestResponse<List<UserDto>>> findAll() {
         var userDTOList = userControllerContract.findAll();
         return ResponseEntity.ok(RestResponse.of(userDTOList));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<RestResponse<Object>> delete(@PathVariable Long id) {
-        userControllerContract.delete(id);
-        return ResponseEntity.ok(RestResponse.empty());
+    @DeleteMapping
+    public ResponseEntity<RestResponse<String>> delete(@RequestBody DeleteUserRequest deleteUserRequest) {
+
+        if (userControllerContract.delete(deleteUserRequest)) {
+            return ResponseEntity.ok(RestResponse.of("Deleted by " + deleteUserRequest.name()));
+        } else {
+            return ResponseEntity.ok(RestResponse.errorMessage(
+                  String.format("%s kullanıcı adı ile %s telefonu bilgileri uyuşmamaktadır",
+                          deleteUserRequest.name(), deleteUserRequest.phoneNumber())));
+        }
+
     }
+
 }

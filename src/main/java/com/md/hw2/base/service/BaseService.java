@@ -2,6 +2,7 @@ package com.md.hw2.base.service;
 
 import com.md.hw2.base.entity.BaseAdditionalFields;
 import com.md.hw2.base.entity.BaseEntity;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Getter
 public abstract class BaseService<E extends BaseEntity, R extends JpaRepository<E, Long>> {
 
     private final R repository;

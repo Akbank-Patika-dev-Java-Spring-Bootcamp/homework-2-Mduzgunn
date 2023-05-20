@@ -1,11 +1,12 @@
 package com.md.hw2.controller.contract.impl;
 
+import com.md.hw2.base.RestResponse;
 import com.md.hw2.controller.contract.UserControllerContract;
 import com.md.hw2.dto.UserDto;
 import com.md.hw2.dto.requests.CreateUserRequest;
+import com.md.hw2.dto.requests.DeleteUserRequest;
 import com.md.hw2.dto.requests.UpdateUserRequest;
 import com.md.hw2.entity.User;
-import com.md.hw2.exception.UserErrorMessage;
 import com.md.hw2.mapper.UserMapper;
 import com.md.hw2.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -28,13 +29,10 @@ public class UserControllerContractImpl implements UserControllerContract {
 
     @Override
     public UserDto update(Long id, UpdateUserRequest updateUserRequest) {
-        User user = UserMapper.INSTANCE.updateUserRequestToUser(id, updateUserRequest);
-//        if (userDto == null) {
-//            // TODO hata mesajı dön
-//            return null;
-//        }
+        User user = userService.findByIdWithControl(id);
+        user.setPhoneNumber(updateUserRequest.phoneNumber());
         user = userService.save(user);
-        return UserMapper.INSTANCE.userToUserDto(null);
+        return UserMapper.INSTANCE.userToUserDto(user);
     }
 
 
@@ -51,7 +49,15 @@ public class UserControllerContractImpl implements UserControllerContract {
     }
 
     @Override
-    public void delete(Long id) {
-        userService.delete(id);
+    public UserDto findByName(String name) {
+        User user = userService.getUserByName(name);
+        return UserMapper.INSTANCE.userToUserDto(user);
+    }
+
+    @Override
+    public boolean delete(DeleteUserRequest deleteUserRequest) {
+        return (userService.getUserByName(deleteUserRequest.name()) != null
+                || userService.getUserByNumber(deleteUserRequest.phoneNumber()) != null
+                && userService.deleteUserByPhoneAndName(deleteUserRequest));
     }
 }

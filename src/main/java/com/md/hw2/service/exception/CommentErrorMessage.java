@@ -1,4 +1,4 @@
-package com.md.hw2.exception;
+package com.md.hw2.service.exception;
 
 import com.md.hw2.base.exception.BaseErrorMessage;
 

@@ -3,6 +3,7 @@ package com.md.hw2.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.md.hw2.base.entity.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,13 +24,13 @@ public class Comment extends BaseEntity {
 
     private String message;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "comments" })
-    @JoinColumn(name="PRODUCT_ID")
+    @JoinColumn(name="product_Id")
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_Id")
     @JsonIgnoreProperties(value = { "comments" })
     private User user;
 
