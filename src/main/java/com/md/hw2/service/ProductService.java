@@ -21,30 +21,5 @@ public class ProductService extends BaseService<Product, ProductRepository> {
         this.productMapper = productMapper;
     }
 
-    public ProductDto getProductById(Long id) {
-        return productMapper.productToProductDto(this.findByIdWithControl(id));
-    }
-
-    public List<ProductDto> getAllProductDtoList() {
-        return productMapper.convertToProductDtoList(this.findAll());
-    }
-
-    public ProductDto createProduct(CreateProductRequest createProductRequest) {
-        Product product = productMapper.createProductRequestToProduct(createProductRequest);
-        return productMapper.productToProductDto(this.save(product));
-    }
-
-    public ProductDto updateProduct(Long id, UpdateProductRequest updateProductRequest) {
-        Product product = this.findByIdWithControl(id);
-        product.setPrice(updateProductRequest.price());
-
-        return productMapper.productToProductDto(this.save(product));
-    }
-
-    public String deleteProductById(Long id) {
-        getProductById(id);
-        this.delete(id);
-        return "Product deleted successfully with id " + id;
-    }
 
 }
