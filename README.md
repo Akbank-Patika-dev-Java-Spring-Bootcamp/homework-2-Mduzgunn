@@ -19,7 +19,7 @@ Projeyi klonlayın
 
 Proje dizinine gidin
 ```bash
-  cd blog
+  cd homework-2-Mduzgunn
 ```
 
 Gerekli paketleri yükleyin
